@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>Drunkify - Spotify jukebox</title>
+    <title>Drunkify - MPD jukebox</title>
 
     <link href="static/css/bootstrap.css" rel="stylesheet"/>
     <link href="static/css/bootstrap-responsive.css" rel="stylesheet"/>
@@ -25,29 +25,29 @@
         
         <div class="row-fluid">
             <div class="form-search" style="text-align: center">
-                <input type="text" class="input-xxlarge search-query" data-bind="value: query, event: { keyup: maybeSearch }" placeholder="Search for track" />
-                <button class="btn btn-info" type="button" data-bind="click: search">Search</button>
-                <button class="btn" type="button" data-bind="click: clearSearch, css: { active: result().length > 0, disabled: result().length == 0 }">Cancel</button>
+                <input type="text" class="input-xxlarge search-query" data-bind="value: query, event: { keyup: maybeSearch }" placeholder="$_("Search for track")" />
+                <button class="btn btn-info" type="button" data-bind="click: search">$_("Search")</button>
+                <button class="btn" type="button" data-bind="click: clearSearch, css: { active: result().length > 0, disabled: result().length == 0 }">$_("Cancel")</button>
             </div>
         </div>
         
         <br/>
         
         <div class="row-fluid">
-            <div class="alert alert-success" id="song-added" style="display: none;"><span data-bind="text: added"></span> has been added to the playlist</div>
+            <div class="alert alert-success" id="song-added" style="display: none;"><span data-bind="text: added"></span> $_("has been added to the playlist")</div>
         </div>
         
         <div class="row-fluid">
             <table class="table" data-bind="style: { display: result().length > 0 ? '' : 'none' }">
                 <thead>
                     <th>&nbsp;</th>
-                    <th>Artist</th>
-                    <th>Track</th>
-                    <th>Album</th>
+                    <th>$_("Artist")</th>
+                    <th>$_("Track")</th>
+                    <th>$_("Album")</th>
                 </thead>
                 <tbody data-bind="foreach: result">
                     <tr>
-                        <td><a href="#" data-bind="click: \$root.enqueue, text: 'Add'"></a></td>
+                        <td><a href="#" data-bind="click: \$root.enqueue, text: '$_("Add")'"></a></td>
                         <td data-bind="text: artist"></td>
                         <td data-bind="text: songName"></td>
                         <td data-bind="text: album"></td>
@@ -59,8 +59,8 @@
         <div class="row-fluid">
             <table class="table" data-bind="style: { display: result().length == 0 ? '' : 'none' }">
                 <thead>
-                    <th>Artist</th>
-                    <th>Track</th>
+                    <th>$_("Artist")</th>
+                    <th>$_("Track")</th>
                 </thead>
                 <tbody data-bind="foreach: playlist">
                     <tr>

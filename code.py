@@ -1,10 +1,17 @@
 import web
+import gettext
 import mpd
 import json
+import os
 
 import config
 
-render = web.template.render('templates/')
+curdir = os.path.abspath(os.path.dirname(__file__))
+localedir = curdir + '/i18n'
+
+gettext.install('messages', localedir, unicode=True)
+gettext.translation('messages', localedir, languages=[config.LOCALE]).install(True)
+render = web.template.render('templates/', globals={'_': _})
 
 urls = (
     '/', 'index',

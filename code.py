@@ -2,6 +2,8 @@ import web
 import mpd
 import json
 
+import config
+
 render = web.template.render('templates/')
 
 urls = (
@@ -29,7 +31,7 @@ class Client:
     @staticmethod
     def _connect():
         Client.client = mpd.MPDClient()
-        Client.client.connect("localhost", 6600)
+        Client.client.connect(config.MPD_HOST, config.MPD_PORT)
 
 class index:
     def GET(self):

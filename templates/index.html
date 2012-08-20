@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Drunkify - Spotify jukebox</title>
+
+    <link href="static/css/bootstrap.css" rel="stylesheet"/>
+    <link href="static/css/bootstrap-responsive.css" rel="stylesheet"/>
+    <link href="static/css/drunkify.css" rel="stylesheet"/>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="hero-unit">
+            <h1 data-bind="text: currentSongName"></h1>
+            <p data-bind="text: currentSongArtist"></p>
+            
+            <div class="progress progress-striped active progress-success">
+                <div class="bar" data-bind="style: { width: songProgress }"></div>
+            </div>
+            
+            <p class="pull-right" data-bind="text: songProgressText"></p>
+        </div>
+        
+        <div class="row-fluid">
+            <div class="form-search" style="text-align: center">
+                <input type="text" class="input-xxlarge search-query" data-bind="value: query, event: { keyup: maybeSearch }" placeholder="Search for track" />
+                <button class="btn btn-info" type="button" data-bind="click: search">Search</button>
+                <button class="btn" type="button" data-bind="click: clearSearch, css: { active: result().length > 0, disabled: result().length == 0 }">Cancel</button>
+            </div>
+        </div>
+        
+        <br/>
+        
+        <div class="row-fluid">
+            <div class="alert alert-success" id="song-added" style="display: none;"><span data-bind="text: added"></span> has been added to the playlist</div>
+        </div>
+        
+        <div class="row-fluid">
+            <table class="table" data-bind="style: { display: result().length > 0 ? '' : 'none' }">
+                <thead>
+                    <th>&nbsp;</th>
+                    <th>Artist</th>
+                    <th>Track</th>
+                    <th>Album</th>
+                </thead>
+                <tbody data-bind="foreach: result">
+                    <tr>
+                        <td><a href="#" data-bind="click: \$root.enqueue, text: 'Add'"></a></td>
+                        <td data-bind="text: artist"></td>
+                        <td data-bind="text: songName"></td>
+                        <td data-bind="text: album"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="row-fluid">
+            <table class="table" data-bind="style: { display: result().length == 0 ? '' : 'none' }">
+                <thead>
+                    <th>Artist</th>
+                    <th>Track</th>
+                </thead>
+                <tbody data-bind="foreach: playlist">
+                    <tr>
+                        <td data-bind="text: artist"></td>
+                        <td data-bind="text: songName"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+    <script src="http://cloud.github.com/downloads/SteveSanderson/knockout/knockout-2.1.0.js"></script>
+    <script src="static/js/bootstrap.js"></script>
+    <script src="static/js/drunkify.js"></script>
+        
+</body>
+</html>

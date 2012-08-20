@@ -14,7 +14,6 @@ function DrunkifyViewModel() {
         $.get('/api/search', { q: self.query() })
             .then(function(data) {
                 var tracks = $.map(data, function(item) {
-                    console.log(item);
                     return new Track(item);
                 })
                 self.result(tracks);

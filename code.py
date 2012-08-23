@@ -15,9 +15,11 @@ render = web.template.render('templates/', globals={'_': _})
 
 urls = (
     '/', 'index',
+    '/admin', 'admin',
     '/api/playlist', 'playlist',
     '/api/play', 'play',
     '/api/search', 'search',
+    '/api/admin/command', 'admin_command',
 )
 
 class Client:
@@ -43,6 +45,10 @@ class Client:
 class index:
     def GET(self):
         return render.index()
+        
+class admin:
+    def GET(self):
+        return render.admin()
         
 class playlist:
     def GET(self):
@@ -73,6 +79,17 @@ class search:
         result = Client.getClient().search("any", i.q)
         web.header('Content-Type', 'application/json')
         return json.dumps(result)
+        
+class admin_command:
+    def GET(self):
+        i = web.input(cmd=None)
+        {
+            'clear': lambda: Client.getClient().clear(),
+            'play': lambda: Client.getClient().play(),
+            'pause': lambda: Client.getClient().pause(),
+            'next': lambda: Client.getClient().delete(0),
+        }[i.cmd]()
+        return "done"
         
 if __name__ == "__main__":
     app = web.application(urls, globals())

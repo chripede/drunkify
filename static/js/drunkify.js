@@ -14,6 +14,9 @@ function DrunkifyViewModel() {
         $.get('/api/search', { q: self.query() })
             .then(function(data) {
                 var tracks = $.map(data, function(item) {
+                    if (item.file.indexOf(":artist:") >= 0 || item.file.indexOf(":album:") >= 0) {
+                        return;
+                    }
                     return new Track(item);
                 })
                 self.result(tracks);
